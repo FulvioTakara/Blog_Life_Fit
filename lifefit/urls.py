@@ -1,5 +1,7 @@
 from django.urls import path
 
+from rest_framework.routers import SimpleRouter
+
 from .views import (
     CategoryAPIView,
     CategorysAPIView,
@@ -7,7 +9,15 @@ from .views import (
     PublicationsAPIView,
     CommentAPIView,
     CommentsAPIView,
+    CategoryViewSet,
+    PublicationViewSet,
+    CommentViewSet
 )
+
+router = SimpleRouter()
+router.register('categorys', CategoryViewSet)
+router.register('publications', PublicationViewSet)
+router.register('comments', CommentViewSet)
 
 urlpatterns = [
     path('categorys/', CategorysAPIView.as_view(), name='categorys'),

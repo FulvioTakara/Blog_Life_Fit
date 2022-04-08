@@ -28,7 +28,7 @@ class Publication(Base):
     contents = models.TextField()
     excerpt = models.TextField()
     category = models.ForeignKey(
-        Category, on_delete=models.DO_NOTHING, blank=True, null=True)
+        Category, related_name='publications', on_delete=models.DO_NOTHING, blank=True, null=True)
     image = models.ImageField(
         upload_to='publication_img/%Y/%m/%d', blank=True, null=True)
 
@@ -44,7 +44,8 @@ class Comment(Base):
     name = models.CharField(max_length=255)
     email = models.EmailField()
     coments = models.TextField()
-    publication = models.ForeignKey(Publication, on_delete=models.CASCADE)
+    publication = models.ForeignKey(
+        Publication, related_name='comments', on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
 
     class Meta:
