@@ -1,10 +1,9 @@
-from atexit import register
 from django.contrib import admin
 
-from models import Category, Publication, Comment
+from .models import Category, Publication, Comment
 
 
-@register.admin(Category)
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'created',
@@ -14,7 +13,7 @@ class CategoryAdmin(admin.ModelAdmin):
     )
 
 
-@register.admin(Publication)
+@admin.register(Publication)
 class PublicationAdmin(admin.ModelAdmin):
     list_display = (
         'created',
@@ -29,7 +28,7 @@ class PublicationAdmin(admin.ModelAdmin):
     )
 
 
-@register.admin(Comment)
+@admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = (
         'created',
@@ -37,7 +36,7 @@ class CommentAdmin(admin.ModelAdmin):
         'active',
         'name',
         'email',
-        'contents',
+        'coments',
         'publication',
         'author',
     )
