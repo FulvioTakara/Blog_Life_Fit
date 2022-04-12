@@ -4,7 +4,9 @@ from rest_framework.generics import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.permissions import DjangoModelPermissions
 
+from .permissions import EhSuperUser
 from .models import Category, Publication, Comment
 from .serializers import CategorySerializer, PublicationSerializer, CommentSerializer
 
@@ -84,6 +86,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class PublicationViewSet(viewsets.ModelViewSet):
     queryset = Publication.objects.all()
     serializer_class = PublicationSerializer
+    permission_classes = (EhSuperUser, DjangoModelPermissions, )
 
     @action(detail=True, methods=['get'])
     def comments(self, request, pk=None):
@@ -95,3 +98,4 @@ class PublicationViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    permission_classes = (EhSuperUser, DjangoModelPermissions, )
