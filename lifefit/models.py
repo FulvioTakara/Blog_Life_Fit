@@ -17,6 +17,7 @@ class Category(Base):
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categorys'
+        ordering = ['-id']
 
     def __str__(self):
         return self.name_cat
@@ -35,6 +36,7 @@ class Publication(Base):
     class Meta:
         verbose_name = 'Publication'
         verbose_name_plural = 'Publications'
+        ordering = ['-id']
 
     def __str__(self):
         return self.title
@@ -51,6 +53,7 @@ class Comment(Base):
     class Meta:
         verbose_name = 'Comment'
         verbose_name_plural = 'Comments'
+        ordering = ['-id']
 
     def __str__(self):
         return self.name
