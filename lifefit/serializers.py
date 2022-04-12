@@ -1,32 +1,6 @@
+from numbers import Real
 from rest_framework import serializers
 from .models import Category, Publication, Comment
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = (
-            'id',
-            'name_cat',
-            'created',
-            'active',
-        )
-
-
-class PublicationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Publication
-        fields = (
-            'id',
-            'title',
-            'contents',
-            'excerpt',
-            'category',
-            'author',
-            'image',
-            'created',
-            'active',
-        )
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -44,4 +18,45 @@ class CommentSerializer(serializers.ModelSerializer):
             'author',
             'created',
             'active',
+        )
+
+
+class PublicationSerializer(serializers.ModelSerializer):
+    comments = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='comment-detail'
+    )
+
+    class Meta:
+        model = Publication
+        fields = (
+            'id',
+            'title',
+            'contents',
+            'excerpt',
+            'category',
+            'author',
+            'image',
+            'created',
+            'active',
+            'comments',
+        )
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    publications = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='publication-detail',
+    )
+
+    class Meta:
+        model = Category
+        fields = (
+            'id',
+            'name_cat',
+            'created',
+            'active',
+            'publications',
         )
