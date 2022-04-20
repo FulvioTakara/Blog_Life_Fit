@@ -40,3 +40,4 @@ class CommentAdmin(admin.ModelAdmin):
         'publication',
         'author',
     )
+
